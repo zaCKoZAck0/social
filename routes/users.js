@@ -62,7 +62,7 @@ router.patch('/:userID', async function(request,response){
                 password: request.body.password,
                 email: request.body.email
             }});
-        response.json(removedUser);
+        response.json(updatedUser);
         console.log("User Updated");
     }
     catch(err){
