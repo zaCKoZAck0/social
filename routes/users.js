@@ -16,10 +16,10 @@ router.post('/', async function(request,response){
             password: hashPassword,
         });
     const savedUser = await user.save();
-    response.json(savedUser);
+    response.status(201).json(savedUser);
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -27,11 +27,11 @@ router.post('/', async function(request,response){
 router.get('/',async function(request,response){
     try{
     const users = await User.find();
-    response.json(users);
+    response.status(200).json(users);
     console.log("Got Users")
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -39,22 +39,22 @@ router.get('/',async function(request,response){
 router.get('/:userID',async function(request,response){
     try{
     const user = await User.findById(request.params.userID);
-    response.json(user);
+    response.status(200).json(user);
     console.log("Got User " + request.params.userID)
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
 router.delete('/:userID', async function(request,response){
     try{
         const removedUser = await User.remove({_id: request.params.userID});
-        response.json(removedUser);
+        response.status(204).json(removedUser);
         console.log("User Deleted");
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -65,11 +65,11 @@ router.patch('/:userID', async function(request,response){
                 password: request.body.password,
                 email: request.body.email
             }});
-        response.json(updatedUser);
+        response.status(204).json(updatedUser);
         console.log("User Updated");
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 

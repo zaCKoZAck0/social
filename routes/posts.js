@@ -12,10 +12,10 @@ router.post('/', async function(request,response){
     });
     try{
     const savedPost = await post.save();
-    response.json(savedPost);
+    response.status(201).json(savedPost);
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -23,11 +23,11 @@ router.post('/', async function(request,response){
 router.get('/',async function(request,response){
     try{
     const posts = await Post.find();
-    response.json(posts);
+    response.status(200).json(posts);
     console.log("Got Posts")
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -35,22 +35,22 @@ router.get('/',async function(request,response){
 router.get('/:postID',async function(request,response){
     try{
     const post = await Post.findById(request.params.postID);
-    response.json(post);
+    response.status(200).json(post);
     console.log("Got Post " + request.params.postID)
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
 router.delete('/:postID', async function(request,response){
     try{
         const removedPost = await Post.remove({_id: request.params.postID});
-        response.json(removedPost);
+        response.status(204).json(removedPost);
         console.log("Post Deleted");
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
@@ -61,11 +61,11 @@ router.patch('/:postID', async function(request,response){
                 type: request.body.type,
                 byUser: request.body.byUser,
             }});
-        response.json(updatedPost);
+        response.status(204).json(updatedPost);
         console.log("Post Updated");
     }
     catch(err){
-        response.json({message: err})
+        response.status(500).json({message: err})
     }
 })
 
