@@ -1,7 +1,10 @@
+require('dotenv/config')
+
 const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcrypt")
 const User = require('../models/User')
+const jwt = require('jsonwebtoken')
 
 
 
@@ -12,7 +15,8 @@ router.post("/", async (request,response)=>{
         response.status(404).send("Can't find User");
     }
     if (await bcrypt.compare(request.body.password,user.password)){
-        response.send("Sucess")
+        const accessToken = await jwt.sign({username: request.body.username}, process.env.ACCESS_TOKEN_SECRET)
+        response.status(200).json({accessToken: accessToken})
         console.log("Login Sucessfull")
     }
     else{
