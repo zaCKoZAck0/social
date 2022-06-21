@@ -17,7 +17,7 @@ try {
       { useNewUrlParser: true, useUnifiedTopology: true },
       () => {console.log("**Mongoose is connected")
         // listen to port
-        const port = 4000;
+        const port = 4001;
         app.listen(port, () => console.log(`Express Running on PORT ${port} `));
     });
 
@@ -32,8 +32,18 @@ app.use('/api/user', usersRoute);
 const postsRoute = require('./routes/posts');
 app.use('/api/post', postsRoute);
 
+// Login / Sign-up
+
 const loginRoute = require('./routes/login');
 app.use('/api/login', loginRoute);
+
+// User Data 
+
+const getFriendsRoute = require("./routes/my-friends");
+app.use('/api/get-friends', getFriendsRoute)
+
+const getPostsRoute = require("./routes/my-posts");
+app.use('/api/get-posts', getPostsRoute)
 
 
 

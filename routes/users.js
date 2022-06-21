@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcrypt")
 const User = require('../models/user-data/User')
-
+const Friends = require('../models/user-data/Friends')
 
 
 router.post('/', async function(request,response){
@@ -16,6 +16,10 @@ router.post('/', async function(request,response){
             password: hashPassword,
         });
     const savedUser = await user.save();
+    const friends = new Friends({
+        user: savedUser._id, 
+    })
+    friends.save();
     response.status(201).json(savedUser);
     }
     catch(err){

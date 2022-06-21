@@ -12,6 +12,6 @@ const FriendsSchema = mongoose.Schema({
       ref: "user",
       default: []
     }
-  });
+});
 
 module.exports = mongoose.model("Friends", FriendsSchema);

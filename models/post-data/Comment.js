@@ -12,6 +12,10 @@ const CommentSchema = mongoose.Schema({
       ref: "post",
       required: true,
       },
+    text: {
+      type: String,
+      required: true,
+    },
     comment: {
       type: [ObjectId],
       ref: "comment",

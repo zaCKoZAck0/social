@@ -15,7 +15,7 @@ router.post("/", async (request,response)=>{
         response.status(404).send("Can't find User");
     }
     if (await bcrypt.compare(request.body.password,user.password)){
-        const accessToken = await jwt.sign({username: request.body.username}, process.env.ACCESS_TOKEN_SECRET)
+        const accessToken = await jwt.sign({_id: user._id}, process.env.ACCESS_TOKEN_SECRET)
         response.status(200).json({accessToken: accessToken})
         console.log("Login Sucessfull")
     }
@@ -26,6 +26,5 @@ router.post("/", async (request,response)=>{
     catch(err){
         response.json({message: err})
     }
-})
-
+});
 module.exports = router;

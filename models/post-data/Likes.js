@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
-const FriendsSchema = mongoose.Schema({
+const LikesSchema = mongoose.Schema({
     post: {
       type: ObjectId,
       ref: "post",
@@ -14,4 +14,4 @@ const FriendsSchema = mongoose.Schema({
     }
   });
 
-module.exports = mongoose.model("Friends", FriendsSchema);
+module.exports = mongoose.model("Likes", LikesSchema);
