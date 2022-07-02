@@ -6,7 +6,6 @@ const Friends = require('../models/user-data/Friends')
 
 
 router.post('/', async function(request,response){
-    console.log("User Added");
     try{
         //const salt = await bcrypt.genSalt();
         const hashPassword = await bcrypt.hash(request.body.password, 10)
@@ -25,7 +24,8 @@ router.post('/', async function(request,response){
     catch(err){
         response.status(500).json({message: err})
     }
-})
+    console.log("User Added");
+});
 
 // GET ALL USERS
 router.get('/',async function(request,response){

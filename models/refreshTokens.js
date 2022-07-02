@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const RefreshTokenSchema = mongoose.Schema({
     token: {
         refreshTokens: String,
-        required: true
     }
 });
 

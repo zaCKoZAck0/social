@@ -32,10 +32,12 @@ app.use('/api/user', usersRoute);
 const postsRoute = require('./routes/posts');
 app.use('/api/post', postsRoute);
 
-// Login / Sign-up
+// Login / Sign-up / logout
 
 const loginRoute = require('./routes/login');
 app.use('/api/login', loginRoute);
+const logoutRoute = require('./routes/logout');
+app.use('/api/logout', logoutRoute);
 
 // User Data 
 
