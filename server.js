@@ -2,13 +2,20 @@ require('dotenv/config')
 
 const express = require('express');
 const bodyParser= require('body-parser');
+var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 
 const app = express();
 
+const cors = require("cors");
+
+app.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
+
+app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
+
 // MIDDLEWARE
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 
 // Connect to DB
 try {

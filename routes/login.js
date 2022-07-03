@@ -18,9 +18,16 @@ router.post("/", async (request,response)=>{
         const accessToken = jwt.sign({_id: user._id}, 
             process.env.REFRESH_TOKEN_SECRET,
             {expiresIn: "30m"});
-        const refreshToken = jwt.sign(user, 
+        //console.log(accessToken);      
+        const refreshToken = jwt.sign({_id: user._id}, 
             process.env.REFRESH_TOKEN_SECRET);
-        const newRefreshToken = new refreshTokens({token: refreshToken});
+
+            console.log(accessToken, refreshToken);
+            const newRefreshToken = new refreshTokens({token: refreshToken});
+        
+        response.cookie('accessToken', accessToken, {httpOnly: true});
+        response.cookie('refreshToken', refreshToken, {httpOnly: true});
+
         response.status(200).json({accessToken: accessToken,
             refreshToken: refreshToken})
         console.log("Login Sucessfull")
@@ -30,7 +37,7 @@ router.post("/", async (request,response)=>{
     }
     }
     catch(err){
-        response.json({message: err})
+        response.json({message: "ur mom"})
     }
 });
 
@@ -44,6 +51,8 @@ router.post("/token", (request,response)=>{
         const accessToken = jwt.sign({_id: user._id}, 
             process.env.REFRESH_TOKEN_SECRET,
             {expiresIn: "30m"});
+            
+            response.cookie('accessToken', accessToken, {httpOnly: true});
             response.json({accessToken: accessToken})  
     });
     
